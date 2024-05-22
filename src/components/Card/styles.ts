@@ -3,8 +3,10 @@ import styled from "styled-components";
 const CardHeight = 450;
 const CardWidth = 350;
 export const CardContainer = styled.div`
+*{
+    font-family: "Barlow", sans-serif;
+}
 position: relative;
-display: flex;
 width: ${CardWidth}px;
 height: ${CardHeight}px;
 border-radius: 20px;
@@ -31,13 +33,33 @@ z-index: 2;
 `
 export const ClanLogo = styled.img`
 position: absolute;
-top: 55%;
-left: 88%;
+top: 50%;
+left: 50%;
 transform: translate(-50%, -50%);
 width: 200px;
 object-fit: cover;
 background-size: cover;
 z-index: 1;
+`
+export const ClanNameBox = styled.div`
+position: absolute;
+top: 20%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 80%;
+font-size: 12px;
+text-align: center;
+border-radius: 10px;
+z-index: 3;
+`
+export const ProjectTitle = styled.div`
+position: absolute;
+top: 94%;
+left: 50%;
+transform: translate(-50%, -50%);
+color: white;
+text-align: center;
+width: 100%;
 `
 export const SplashArt = styled.img`
 position: absolute;
@@ -54,38 +76,33 @@ filter: grayscale(100%);
 `
 export const LegendName = styled.div`
 position: absolute;
-font-family: Verdana, Geneva, Tahoma, sans-serif;
 top: 85%;
 left: 50%;
 transform: translate(-50%, -50%);
 z-index: 3;
-width: 200px;
-height: 50px;
+height: 40px;
+font-size: 13px;
 display: flex;
 align-items: center;
 text-align: center;
 justify-content: center;
-border-radius: 20px;
+border-radius: 10px;
+width: 60%;
 color: white;
 `
 export const PlayerName = styled.div`
-font-family: Verdana, Geneva, Tahoma, sans-serif;
 position: absolute;
 top: 12%;
 left: 50%;
 transform: translate(-50%, -50%);
 color: white;
-font-size: 10px;
+width: 90%;
+font-size: 14px;
 z-index: 2;
-width: 40%;
-padding-left: 10px;
-padding-right: 10px;
-border-radius: 20px;
+border-radius: 10px;
 text-align: center;
-font-family: "Barlow", sans-serif;
 `
 export const PlayerStats = styled.div`
-font-family: Verdana, Geneva, Tahoma, sans-serif;
 position: absolute;
 top: 58%;
 left: 60%;
@@ -98,7 +115,6 @@ font-size: 8px;
 z-index: 2;
 width: 180px;
 border-radius: 20px;
-font-family: "Barlow", sans-serif;
 h1{
     text-align: center;
 }
@@ -111,13 +127,22 @@ export const Credits = styled.div`
 position: absolute;
 color: white;
 display: flex;
-top: 97%;
+top: 5%;
 left: 50%;
 transform: translate(-50%, -50%);
-font-family: Verdana, Geneva, Tahoma, sans-serif;
 font-weight: bold;
 font-size: 12px;
 p{
     margin: 0px 10px;
 }
+`
+export const CustomizeContainer = styled.div`
+display: grid;
+place-content: center;
+align-items: center;
+`
+export const Select = styled.select`
+width: 150px;
+margin-top: 5px;
+text-align: center;
 `
