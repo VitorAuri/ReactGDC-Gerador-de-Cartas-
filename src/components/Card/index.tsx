@@ -1,5 +1,5 @@
-import { CardContainer, ClanLogo, ClanNameBox, Credits, CustomizeContainer, Fundo, LegendImage, LegendName, PlayerName, ProjectTitle, Select, SplashArt } from "./styles";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { CardContainer, CardFrame, ClanLogo, Credits, CustomizeContainer, Fundo, LegendImage, PlayerInfo, ProjectTitle, Select, SplashArt } from "./styles";
 
 import blackBG from '../../assets/cardBG/black.png';
 import greenBG from '../../assets/cardBG/green.png';
@@ -11,6 +11,9 @@ import blueBG from '../../assets/cardBG/blue.png';
 import cyanBG from '../../assets/cardBG/cyan.png';
 import whiteBG from '../../assets/cardBG/white.png';
 import pinkBG from '../../assets/cardBG/pink.png';
+import brownBG from '../../assets/cardBG/brown.png';
+
+import f_bichos from '../../assets/frame/bichos.png';
 
 interface Legend {
     name: string;
@@ -39,7 +42,6 @@ export const Card = () => {
     const [boxColor, setBoxColor] = useState('rgba(63, 8, 8, 0.8)');
     const [boxShadow, setBoxShadow] = useState('rgba(124, 124, 124, 0.8)');
 
-    const [legendName, setLegendName] = useState('Ada');
     const [currentBG, setCurrentBG] = useState(blackBG);
     const [splashArt, setSplashArt] = useState('');
     const [legendImage, setLegendImage] = useState('');
@@ -103,7 +105,7 @@ export const Card = () => {
         },
         {
             "name": "brown",
-            "background": cyanBG,
+            "background": brownBG,
             "box-color": "",
             "box-shadow": ""
         },
@@ -115,6 +117,36 @@ export const Card = () => {
         }
     ];
 
+    function returnColorName(color: string){
+        switch(color){
+            case "black":
+                return "Preto";
+            case "pink":
+                return "Rosa";
+            case "green":
+                return "Verde";
+            case "orange":
+                return "Laranja";
+            case "purple":
+                return "Roxo";
+            case "red":
+                return "Vermelho";
+            case "yellow":
+                return "Amarelo";
+            case "blue":
+                return "Azul";
+            case "cyan":
+                return "Ciano";
+            case "brown":
+                return "Marrom";
+            case "white":
+                return "Branco";
+            default:
+                return "???";
+        }
+    }
+
+    
     const handleTeamChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedIndex = parseInt(event.target.value);
         const selectedColor = colors[selectedIndex];
@@ -129,7 +161,6 @@ export const Card = () => {
         const selectedIndex = parseInt(event.target.value);
         setSelectedLegendIndex(selectedIndex);
         setSelectedSkinIndex(0);
-        setLegendName(legends[selectedIndex].name)
         updateLegendImage(selectedIndex, 0, currentColor);
         setSplashArt(legends[selectedIndex].splash_art);
     };
@@ -162,28 +193,26 @@ export const Card = () => {
             }
         };
         fetchLegendsData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [currentColor]);
+
+
+
 
     return (
         <>
-            <CardContainer>
+            <CardContainer id="cardContainer">
+                <CardFrame src={f_bichos}/>
                 <LegendImage src={legendImage} />
-                <PlayerName style={{ backgroundColor: boxColor, boxShadow: `0px 0px 10px ${boxShadow}` }}>
+                <PlayerInfo style={{ backgroundColor: boxColor, boxShadow: `0px 0px 10px ${boxShadow}` }}>
                     <h1>Nice Name</h1>
-                </PlayerName>
-                <ClanNameBox style={{ backgroundColor: boxColor, boxShadow: `0px 0px 0px ${boxShadow}` }}>
-                    <h1 style={{ color: `${currentColor}` }}>Bichos do Mato</h1>
-                </ClanNameBox>
+                    <h2 style={{ color: `${currentColor}` }}>Bichos do Mato</h2>
+                </PlayerInfo>
                 <ProjectTitle>
                     <h1>Coliseu de Clãs</h1>
                 </ProjectTitle>
                 <SplashArt src={splashArt} />
                 <ClanLogo src={''} />
-                <LegendName style={{ backgroundColor: boxColor, boxShadow: `0px 0px 10px ${boxShadow}` }}>
-                    <h1>{legendName.charAt(0).toUpperCase() + legendName.slice(1)}</h1>
-                </LegendName>
-                <Credits>
+                <Credits style={{ backgroundColor: boxColor, boxShadow: `10px 0px 10px ${boxShadow}` }}>
                     <p>@NiceNameBH</p>
                     <p>@YaksaTH</p>
                     <p>@Codvox</p>
@@ -194,22 +223,24 @@ export const Card = () => {
             <CustomizeContainer>
                 <Select onChange={handleTeamChange}>
                     {colors.map((color, index) => (
-                        <option key={index} value={index}>{color.name}</option>
+                        <option key={index} value={index}>{returnColorName(color.name)}</option>
                     ))}
                 </Select>
                 <Select onChange={handleLegendChange}>
                     {legends.map((legend, index) => (
-                        <option key={index} value={index}>{legend.name === "default" ? "Padrão":legend.name.charAt(0).toUpperCase() + legend.name.slice(1)}</option>
+                        <option key={index} value={index}>{legend.name.charAt(0).toUpperCase() + legend.name.slice(1)}</option>
                     ))}
                 </Select>
 
                 {legends.length > 0 && (
                     <Select onChange={handleSkinChange}>
                         {legends[selectedLegendIndex].skins.map((skin, index) => (
-                            <option key={index} value={index}>{skin.name}</option>
+                            <option key={index} value={index}>{skin.name === "default" ? "Padrão" : skin.name}</option>
                         ))}
                     </Select>
                 )}
+
+                <button>Baixar Carta</button>
             </CustomizeContainer>
         </>
     );

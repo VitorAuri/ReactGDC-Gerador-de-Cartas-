@@ -4,7 +4,7 @@ const CardHeight = 450;
 const CardWidth = 350;
 export const CardContainer = styled.div`
 *{
-    font-family: "Barlow", sans-serif;
+    font-family: var(--card-font)
 }
 position: relative;
 width: ${CardWidth}px;
@@ -20,6 +20,15 @@ background-size: cover;
 object-fit: cover;
 filter: blur(2px);
 z-index: -1;
+`
+export const CardFrame = styled.img`
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+object-fit: cover;
+background-size: cover;
+z-index: 4;
 `
 export const LegendImage = styled.img`
 position: absolute;
@@ -41,25 +50,16 @@ object-fit: cover;
 background-size: cover;
 z-index: 1;
 `
-export const ClanNameBox = styled.div`
-position: absolute;
-top: 20%;
-left: 50%;
-transform: translate(-50%, -50%);
-width: 80%;
-font-size: 12px;
-text-align: center;
-border-radius: 10px;
-z-index: 3;
-`
 export const ProjectTitle = styled.div`
 position: absolute;
-top: 94%;
+top: 4%;
 left: 50%;
 transform: translate(-50%, -50%);
 color: white;
 text-align: center;
 width: 100%;
+font-size: 9px;
+z-index: 5;
 `
 export const SplashArt = styled.img`
 position: absolute;
@@ -74,32 +74,15 @@ opacity: 0.5;
 filter: blur(1px);
 filter: grayscale(100%);
 `
-export const LegendName = styled.div`
+export const PlayerInfo = styled.div`
 position: absolute;
-top: 85%;
-left: 50%;
-transform: translate(-50%, -50%);
-z-index: 3;
-height: 40px;
-font-size: 13px;
-display: flex;
-align-items: center;
-text-align: center;
-justify-content: center;
-border-radius: 10px;
-width: 60%;
-color: white;
-`
-export const PlayerName = styled.div`
-position: absolute;
-top: 12%;
+top: 14%;
 left: 50%;
 transform: translate(-50%, -50%);
 color: white;
 width: 90%;
 font-size: 14px;
 z-index: 2;
-border-radius: 10px;
 text-align: center;
 `
 export const PlayerStats = styled.div`
@@ -127,19 +110,28 @@ export const Credits = styled.div`
 position: absolute;
 color: white;
 display: flex;
-top: 5%;
+top: 90%;
 left: 50%;
+padding-bottom: 100px;
+padding-left: 50px;
+padding-right: 50px;
 transform: translate(-50%, -50%);
 font-weight: bold;
 font-size: 12px;
+z-index: 3;
 p{
-    margin: 0px 10px;
+    margin: 5px 10px;
 }
 `
 export const CustomizeContainer = styled.div`
 display: grid;
 place-content: center;
 align-items: center;
+grid-template-columns: auto auto;
+background: var(--preto);
+padding: 5px;
+margin-top: 5px;
+border-radius: 8px;
 `
 export const Select = styled.select`
 width: 150px;
